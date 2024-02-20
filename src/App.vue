@@ -34,6 +34,15 @@ const addTodo = () => {
     editable: false,
     createdAt: new Date().getTime()
   })
+
+  // Reset values
+  input_category.value = null
+  input_content.value = ''
+  responsible.value = ''
+}
+
+const removeTodo = todo => {
+  todos.value = todos.value.filter(t => t !== todo)
 }
 
 onMounted(() => {
@@ -83,6 +92,18 @@ onMounted(() => {
             <input type="checkbox" v-model="todo.done" />
             <span :class="`bubble ${todo.category}`"></span>
           </label>
+          <div class="todo-content">
+            <input type="text" v-model="todo.content">
+          </div>
+          <div class="todo-category">
+            <input type="text" v-model="todo.category">
+          </div>
+          <div class="responsible">
+            <input type="text" v-model="todo.responsible">
+          </div>
+          <div class="actions">
+            <button class="delete" @click="removeTodo(todo)">Delete this todo</button>
+          </div>
         </div>
       </div>
     </section>
